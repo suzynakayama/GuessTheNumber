@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: linear-gradient(89deg, rgb(194, 197, 243), rgb(255, 165, 191));;
+    font-family: 'Acme', sans-serif;
+}
+
