@@ -11,7 +11,7 @@ const game = {
     prevGuesses: []
 }
 
-console.log(game.secretNum)
+//console.log(game.secretNum)
 
 checkBtn.addEventListener('click', handleClick)
 resetBtn.addEventListener('click', init)
