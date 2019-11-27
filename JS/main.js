@@ -1,56 +1,55 @@
+let msg = document.getElementById('msg');
+let userInput = document.getElementById('answer')
+let checkBtn = document.getElementById('submit')
+let resetBtn = document.getElementById('reset')
+let userNum = document.getElementById('userNum')
+
 const game = {
-    title: 'Guess the Number!',
     biggestNum: 100,
     smallestNum: 1,
-    secretNum: null,
-    prevGuesses: [],
-    play: function() {
-        let num = NaN;
-
-        this.secretNum = Math.floor(Math.random() * 
-        (this.biggestNum - this.smallestNum + 1)) + this.smallestNum;
-
-        while (num !== this.secretNum) {
-            num = this.getGuess()
-            if (num === undefined || num === 'undefined') {return}
-            this.prevGuesses.push(num);
-            this.render(num);
-            if (num === this.secretNum) {
-                return;
-            }
-        }
-    }
-};
-
-game.getGuess = function() {
-    let answer = prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`)
-
-    let num = parseInt(answer);
-
-    if (num < this.smallestNum || num > this.biggestNum || isNaN(num) === true) {
-        let notProperNumber = prompt(`This is not a number between ${this.smallestNum} and ${this.biggestNum}. If you would like to try again write yes.`)
-        if (notProperNumber.toLowerCase() === 'yes') {
-        game.getGuess()
-        } else {
-            alert('Bye!')
-            return
-        }
-    }
-    return num
+    secretNum: Math.floor(Math.random() * 100) + 1,
+    prevGuesses: []
 }
 
-game.render = function(num) {
-    let prevGuessesString = this.prevGuesses.join(', ')
+console.log(game.secretNum)
 
-    if (num === this.secretNum) {
-        alert(`Congrats! You guessed the number in ${this.prevGuesses.length} guesses!`)
-    } else if (num > this.secretNum) {
-        alert(`Your guess is too high!
-        Previous guesses: ${prevGuessesString}`)
+checkBtn.addEventListener('click', handleClick)
+resetBtn.addEventListener('click', init)
+
+function handleClick(e) {
+    let numberInputed = userInput.value;
+    let numberInputedNotString = parseInt(numberInputed)
+    userInput.value = "";
+
+    game.prevGuesses.push(numberInputedNotString);
+
+    render(numberInputed, numberInputedNotString);
+}
+
+function init() {
+    userInput.value = "";
+    msg.innerHTML = "";
+    userNum.innerHTML = "";
+    game.prevGuesses = [];
+}
+
+function render (numberInputed, numberInputedNotString) {
+    userNum.innerHTML = numberInputed
+    
+    let prevGuessesString = game.prevGuesses.join(', ')
+
+    if (numberInputedNotString < 0 || numberInputedNotString > 100) {
+        msg.innerHTML = `This is not a number between ${game.smallestNum} and ${game.biggestNum}.`
+        game.prevGuesses = [];
     } else {
-        alert(`Your guess is too low!
-        Previous guesses: ${prevGuessesString}`)
+        if (numberInputedNotString === game.secretNum) {
+            msg.innerHTML = `Congrats! You guessed the number in ${game.prevGuesses.length} guesses!`
+        } else if (numberInputedNotString > game.secretNum) {
+            msg.innerHTML = `Your guess is too high!
+            Previous guesses: ${prevGuessesString}`
+        } else {
+            msg.innerHTML = `Your guess is too low!
+            Previous guesses: ${prevGuessesString}`
+        }
     }
 }
-
-//game.play()

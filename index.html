@@ -6,14 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Guess The Number</title>
     <link rel="stylesheet" href="./CSS/style.css">
+    <script defer src="./JS/main.js"></script>
 </head>
 <body>
     <h1>Guess The Number</h1>
 
-    <label for="answer">Pick a number between 1 and 100:</label>
+    <section class="container">
+    <label for="answer" id="pick">Pick a number between 1 and 100:</label>
     <input type="text" name="answer" id="answer">
     <button type="submit" id="submit">Check!</button>
+    
+    <div id="userNum"></div>
 
-    <button type="reset">Play Again</button>
+    <div id="msg"></div>
+    </section>
+
+    <button type="reset" id="reset">Play Again</button>
+
+    <footer><p>Made by Suzy Yume &#9829</p></footer>
 </body>
 </html>
